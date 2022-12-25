@@ -1,5 +1,5 @@
 from sqlalchemy import Boolean, Column, Integer, String, DateTime
-from database import Base
+from .database import Base
 
 class URL(Base):
     __tablename__ = "Table of URLs"
@@ -12,5 +12,3 @@ class URL(Base):
     is_active = Column(Boolean, default=True)
     clicks = Column(Integer, default=0)
     tags = Column(String, default=None)
-    # allow manual expiry date
-    active_till = Column(DateTime)
