@@ -1,4 +1,6 @@
-from fastapi import FastAPI, HTTPException, Depends
+from fastapi import FastAPI, HTTPException, Depends, Request
+from fastapi.responses import RedirectResponse
+
 import secrets
 import validators
 
@@ -18,9 +20,29 @@ def get_db():
     finally:
         db.close()
 
+def not_found_error(request):
+    message = f"This URL, {request.url} does not exist."
+    raise HTTPException(status_code=404, detail=message)
+
 @app.get("/")
 def read_root():
     return "API for LinkBite: the FastAPI-enabled URL shortener"
+
+@app.get("/{url_key}")
+# called only when client URL matches host and key patterns
+def forward_to_target_url(
+    url_key: str,
+    request: Request,
+    db: Session = Depends(get_db)
+    ):
+    db_url = (
+        db.query(models.URL).filter(models.URL.key == url_key, models.URL.is_active).first()
+    )
+
+    if db_url:
+        return RedirectResponse(db_url.target_url)
+    else:
+        not_found_error(request)
     
 def raise_bad_request(message):
     raise HTTPException(status_code=400, detail=message)
