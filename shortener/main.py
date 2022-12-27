@@ -1,6 +1,7 @@
 from fastapi import FastAPI, HTTPException, Depends, Request
 from fastapi.responses import RedirectResponse
 
+# PEP 506
 import secrets
 import validators
 
