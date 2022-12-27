@@ -2,8 +2,8 @@ from sqlalchemy.orm import Session
 from . import keygen, models, schemas
 
 def create_db_url(db: Session, url: schemas.URLBase) -> models.URL:
-    key = keygen.create_key
-    secret_key = keygen.create_key(length=8)
+    key = keygen.create_unique_key(db)
+    secret_key = f"{key}_{keygen.create_key(length=8)}"
     db_url = models.URL(target_url=url.target_url, key=key, secret_key=secret_key)
     db.add(db_url)
     db.commit()
