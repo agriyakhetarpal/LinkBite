@@ -1,0 +1,8 @@
+fastapi
+uvicorn
+uvicorn[standard]
+sqlalchemy
+python-dotenv
+pydantic
+validators
+pre-commit
