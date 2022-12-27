@@ -45,13 +45,13 @@ def raise_bad_request(message):
     raise HTTPException(status_code=400, detail=message)
 
 @app.get("admin/{secret_key}", name="Admin panel", response_model=schemas.URLInfo)
-def get_url_info(secret_key: str, request = Request, db: Session = Depends(get_db)):
+def get_url_info(secret_key: str, request: Request, db: Session = Depends(get_db)):
     if db_url := crud.get_db_url_by_secret_key(db, secret_key=secret_key):
         return get_admin_info(db_url)
     else:
-        not_found_error("You are unauthorised to perform this action.")
+        not_found_error(request)
 
-def get_admin_info(db_url:  models.URL) -> schemas.URLInfo:
+def get_admin_info(db_url: models.URL) -> schemas.URLInfo:
     base_url = URL(get_settings().base_url)
     admin_endpoint = app.url_path_for("Admin panel", secret_key = db_url.secret_key)
     db_url.url = str(base_url.replace(path = db_url.key))
