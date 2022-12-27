@@ -37,6 +37,7 @@ def forward_to_target_url(
     db: Session = Depends(get_db)
     ):
     if db_url := crud.get_db_url_by_key(db=db, url_key=url_key):
+        crud.update_clicks(db=db, db_url=db_url)
         return RedirectResponse(db_url.target_url)
     else:
         not_found_error(request)
@@ -67,3 +68,11 @@ def create_url(url: schemas.URLBase, db:Session = Depends(get_db)):
 
     db_url = crud.create_db_url(db=db, url=url)
     return get_admin_info(db_url)
+
+@app.delete("/admin/{secret_key}")
+def delete_url(secret_key: str, request: Request, db: Session = Depends(get_db)):
+    if db_url := crud.deactivate_url_by_secret_key(db, secret_key=secret_key):
+        message = f"Successfully deleted your shortened URL for '{db_url.target_url}'"
+        return {"detail": message}
+    else:
+        not_found_error(request)
