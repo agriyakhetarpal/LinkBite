@@ -54,4 +54,4 @@ TODO
 Improvements to the source code, documentation, feature requests, and catching and fixing bugs are all welcomed and appreciated – thanks! Please have a look at the issues or the source code. 
 
 # License
-
+MIT
