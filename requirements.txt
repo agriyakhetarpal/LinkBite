@@ -2,6 +2,7 @@ fastapi
 uvicorn
 uvicorn[standard]
 sqlalchemy
+requests
 python-dotenv
 pydantic
 validators

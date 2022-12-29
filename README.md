@@ -9,6 +9,7 @@ LinkBite has a FastAPI + SQLite backend with SQLAlchemy ORM to connect the RESTf
 ## Features
 
 - Create and manage your own shortened URLs
+- Graceful forwarding: check if the URL exists
 - Analytics: count the number of clicks on your URL
 - Admin to deactivate shortened links (through a secret key to said links) 
 
