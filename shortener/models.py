@@ -1,5 +1,6 @@
-from sqlalchemy import Boolean, Column, Integer, String, DateTime
+from sqlalchemy import Boolean, Column, Integer, String
 from .database import Base
+
 
 class URL(Base):
     __tablename__ = "Table of URLs"
