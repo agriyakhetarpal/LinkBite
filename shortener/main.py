@@ -45,6 +45,13 @@ def forward_to_target_url(
     else:
         not_found_error_internal(request)
 
+@app.get("/peek/{url_key}")
+# to get URL from database whose shortened URL is known
+def peek_url(url_key: str, request: Request, db: Session = Depends(get_db)):
+    db_url = crud.get_db_url_by_key(db=db, url_key=url_key)
+    if db_url is None:
+        raise not_found_error_internal(request)
+    return {db_url.target_url}
 
 def raise_bad_request(message):
     raise HTTPException(status_code=400, detail=message)
@@ -54,7 +61,7 @@ def raise_404(message):
     raise HTTPException(status_code=404, detail=message)
 
 
-@app.get("admin/{secret_key}", name="Admin panel", response_model=schemas.URLInfo)
+@app.get("/admin/{secret_key}", name="Admin panel", response_model=schemas.URLInfo)
 def get_url_info(secret_key: str, request: Request, db: Session = Depends(get_db)):
     if db_url := crud.get_db_url_by_secret_key(db, secret_key=secret_key):
         return get_admin_info(db_url)
