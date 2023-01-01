@@ -56,3 +56,15 @@ Improvements to the source code, documentation, feature requests, and catching a
 
 # License
 MIT
+
+# References
+```
+@software{Abid_Gradio_Hassle-free_sharing_2019,
+author = {Abid, Abubakar and Abdalla, Ali and Abid, Ali and Khan, Dawood and Alfozan, Abdulrahman and Zou, James},
+doi = {10.48550/arXiv.1906.02569},
+month = {6},
+title = {{Gradio: Hassle-free sharing and testing of ML models in the wild}},
+url = {https://arxiv.org/abs/1906.02569},
+year = {2019}
+}
+```

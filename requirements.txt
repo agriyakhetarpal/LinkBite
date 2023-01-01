@@ -4,6 +4,7 @@ uvicorn[standard]
 sqlalchemy
 requests
 python-dotenv
+gradio
 pydantic
 validators
 pre-commit
