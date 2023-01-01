@@ -1,3 +1,7 @@
 shortener/__pycache__/
 .env
 .vscode/
+__pycache__
+shortener.db
+flagged/
+urlshortener/
