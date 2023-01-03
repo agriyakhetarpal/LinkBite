@@ -31,7 +31,7 @@ def not_found_error_internal(request):
 
 @app.get("/")
 def read_root():
-    return "API for LinkBite: the FastAPI-enabled URL shortener"
+    return "LinkBite: the FastAPI-enabled URL shortener"
 
 
 @app.get("/{url_key}")
@@ -45,6 +45,7 @@ def forward_to_target_url(
     else:
         not_found_error_internal(request)
 
+
 @app.get("/peek/{url_key}")
 # to get URL from database whose shortened URL is known
 def peek_url(url_key: str, request: Request, db: Session = Depends(get_db)):
@@ -52,6 +53,7 @@ def peek_url(url_key: str, request: Request, db: Session = Depends(get_db)):
     if db_url is None:
         raise not_found_error_internal(request)
     return {db_url.target_url}
+
 
 def raise_bad_request(message):
     raise HTTPException(status_code=400, detail=message)
@@ -86,7 +88,7 @@ def create_url(url: schemas.URLBase, db: Session = Depends(get_db)):
     # graceful forwarding: if URL does not exist
     try:
         response = requests.head(url.target_url)
-        if response.status_code != 200:
+        if response.status_code == 404:
             raise_404(message="This URL does not exist")
     except requests.RequestException:
         raise_bad_request(message="Error accessing URL")
