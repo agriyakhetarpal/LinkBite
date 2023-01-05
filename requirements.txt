@@ -6,5 +6,8 @@ requests
 python-dotenv
 gradio
 pydantic
+starlette
+pytest
+httpx
 validators
 pre-commit
