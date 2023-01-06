@@ -1,3 +1,19 @@
+---
+title: LinkBite
+emoji: ⚓
+colorFrom: yellow
+colorTo: red
+sdk: docker
+python_version: 3.9
+app_file: gradio-app.py
+language: 
+  - en
+tags:
+- fastapi
+- sqlalchemy
+license: mit
+---
+
 ![Logo for LinkBite](img/LinkBite.png)
 
 # LinkBite 
