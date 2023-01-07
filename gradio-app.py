@@ -138,4 +138,4 @@ with gradio.Blocks(
                 fn=delete_url, inputs=link_to_delete, outputs=deletion_output
             )
 
-demo.launch(show_api=False)
+demo.launch(show_api=False, server_name="0.0.0.0", server_port=7860)
