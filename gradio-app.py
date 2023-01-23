@@ -25,7 +25,7 @@ def shorten_url(input_url_textbox: str):
             "target_url": input_url_textbox,
         },
     )
-    return {response.json()["url"], response.json()["admin_url"]}
+    return {response.json()['url'], response.json()['admin_url']}
 
 
 # to get long url behind a shortened url
